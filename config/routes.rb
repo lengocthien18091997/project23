@@ -11,14 +11,14 @@ Rails.application.routes.draw do
   Rails.application.routes.draw do
     root "main#index"
 
-
-
     get  "/login",  to: "sessions#new"
     post   "/login",  to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
 
     get "/register", to: "user#new"
     post "/register", to: "user#create"
+    get "/user_update", to: "user#get"
+    post "/user_update", to: "user#update"
   end
 
 end

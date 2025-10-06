@@ -22,6 +22,14 @@ class UserController < ApplicationController
     end
   end
 
+  def get
+
+  end
+
+  def update
+
+  end
+
 end
 
 

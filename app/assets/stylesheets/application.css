@@ -1,5 +1,12 @@
 body {
-    padding: 0 100px;
+    background-image: url(bg.webp);
+    background-size: 100vh 100vw;
+    overflow: hidden;
+}
+
+h2 {
+    margin: 15px 0 !important;
+    padding: 0 60px;
 }
 
 form.search {
@@ -8,16 +15,33 @@ form.search {
     align-items: center;
     gap: 10px;
     margin: 40px 0 20px 0;
+    padding: 0 60px;
+}
+
+form.update-form {
+    margin: 0;
+    padding: 0 60px;
+}
+
+form.update-form .form-group {
+    padding: 10px 0;
 }
 
 div.pagination {
     display: flex;
     justify-content: end;
     margin: 20px 0;
+    padding: 0 60px;
+}
+
+div.pagination div.pagination {
+    margin: 0;
+    padding: 0;
 }
 
 div.pagination ul {
     gap: 10px;
+    margin: 0;
 }
 
 div.pagination ul li {
@@ -59,10 +83,16 @@ div.pagination ul li a {
     background: #B00100;
 }
 
+.header {
+    padding: 0 60px;
+}
+
 .header, .header div {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: #d6e2ee;
+    height: 100px;
 }
 
 .header img {
@@ -72,7 +102,7 @@ div.pagination ul li a {
 }
 
 .header div:nth-child(1) p {
-    margin: 0;
+    margin: 0 0 0 15px;
     font-size: 50px;
     font-family: fantasy;
     color: #198754;
@@ -224,7 +254,6 @@ body.new {
 }
 
 .index .table-container {
-    overflow-x: auto;
-    margin: 0 auto;
-    max-width: 1000px;
+    padding: 0 60px;
+    width: 100%;
 }
