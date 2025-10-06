@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Find user</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-..." crossorigin="anonymous">
+</head>
+<body class="index">
+
+<div class="header">
+  <div>
+    <%= image_tag "logo.jpg", alt: "Ảnh đại diện", class: "img-thumbnail", width: 100 %>
+    <p>Find user</p>
+  </div>
+  <div>
+    <% if current_user %>
+      <p><%= current_user.role %> - <%= current_user&.full_name %></p>
+      <%= button_to logout_path, method: :delete, class: "btn-logout", alt: "Logout" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+        </svg>
+      <% end %>
+      <%= button_to logout_path, method: :delete, class: "btn-logout", alt: "Logout" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+             class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+                d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"></path>
+          <path fill-rule="evenodd"
+                d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"></path>
+        </svg>
+      <% end %>
+  </div>
+<% end %>
+</div>
+
+<% if current_user &&  (current_user.role == "admin" || current_user.role == "student")%>
+
+  <!-- Thanh tìm kiếm -->
+  <%= form_with url: root_path, method: :get, local: true, class: "search" do |f| %>
+    <div>
+      <%= f.text_field :query, value: params[:query], class: "form-control", placeholder: "Nhập tên hoặc email..." %>
+    </div>
+
+    <div>
+      <% if current_user.role == "admin" %>
+        <%= f.select :role, options_for_select(
+            [["Tất cả", ""], ["Admin", "admin"], ["Gia sư", "teacher"], ["Học viên", "student"]],
+            selected: params[:role]
+        ), {}, class: "form-select" %>
+      <%end %>
+    </div>
+
+    <div>
+      <%= f.submit "Tìm kiếm", class: "btn btn-success w-100" %>
+    </div>
+
+    <div>
+      <%= link_to "Đặt lại", root_path, class: "btn btn-success w-100" %>
+    </div>
+  <% end %>
+
+  <h2>Danh sách user</h2>
+  <% if @user.present? %>
+    <div class="table-container">
+      <table>
+        <thead>
+        <tr>
+          <th>Họ tên</th>
+          <th>Email</th>
+          <th>Số điện thoại</th>
+          <th class="text-center">Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @user.each do |user| %>
+          <tr>
+            <td><%= user.full_name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.phone_number %></td>
+            <td class="text-center">
+              <button type="button" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"></path>
+                  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"></path>
+                </svg>
+                Xem chi tiết
+              </button>
+              <button type="button" class="btn btn-outline-danger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-lock2-fill" viewBox="0 0 16 16">
+                  <path d="M7 6a1 1 0 0 1 2 0v1H7z"></path>
+                  <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2m-2 6v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V8.3c0-.627.46-1.058 1-1.224V6a2 2 0 1 1 4 0"></path>
+                </svg>
+                Lock
+              </button>
+              <button type="button" class="btn btn-success">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-lock2-fill" viewBox="0 0 16 16">
+                  <path d="M7 6a1 1 0 0 1 2 0v1H7z"></path>
+                  <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2m-2 6v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V8.3c0-.627.46-1.058 1-1.224V6a2 2 0 1 1 4 0"></path>
+                </svg>
+                Open
+              </button>
+              <%#= link_to "Xem chi tiết",  class: "btn btn-detail" %>
+<!--              user_path(user)-->
+              <%#= link_to "Lock", method: :patch, class: "btn btn-lock" %>
+<!--              lock_user_path(user),-->
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <!-- ✅ Thanh phân trang -->
+    <div class="pagination">
+      <%= will_paginate @user %>
+    </div>
+  <% else %>
+    <p style="text-align:center;">Chưa có gia sư nào.</p>
+  <% end %>
+<% elsif current_user && current_user.role == "teacher" %>
+  <p style="text-align:center;">ds tin nhắn</p>
+<% end %>
+
+</body>
+</html>
