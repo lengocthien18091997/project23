@@ -1,12 +1,16 @@
 body {
     background-image: url(bg.webp);
     background-size: 100vh 100vw;
-    overflow: hidden;
+    overflow: auto;
 }
 
 h2 {
     margin: 15px 0 !important;
     padding: 0 60px;
+}
+
+.form-actions {
+    margin-bottom: 50px;
 }
 
 form.search {

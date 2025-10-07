@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_one :teacher_profile, dependent: :destroy
+  accepts_nested_attributes_for :teacher_profile
   has_many :student_requests, class_name: "Request", foreign_key: "student_id", dependent: :destroy
   has_many :teacher_requests, class_name: "Request", foreign_key: "teacher_id", dependent: :destroy
   has_many :timetables, foreign_key: "teacher_id", dependent: :destroy
@@ -17,4 +18,3 @@ class User < ActiveRecord::Base
     is_locked
   end
 end
-

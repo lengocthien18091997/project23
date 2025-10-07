@@ -23,10 +23,29 @@ class UserController < ApplicationController
   end
 
   def get
-
+    @current_user.build_teacher_profile if @current_user.teacher_profile.nil?
   end
 
   def update
+    if @current_user.update(params_update)
+      flash[:notice] = "Cập nhật thành công!"
+      redirect_to user_update_path
+    else
+      flash.now[:alert] = "Cập nhật thất bại, vui lòng kiểm tra lại."
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def params_update
+    # binding.pry
+    params.require(:user).permit(
+        :full_name, :email, :phone_number, :gender, :date_of_birth, :is_locked,
+        teacher_profile_attributes: [
+            :bio, :education_level, :expirence_years, :location, :hourly_rate,
+            subjects: {},
+            availability: {}
+        ]
+    )
 
   end
 
