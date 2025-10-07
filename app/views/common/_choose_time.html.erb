@@ -1,4 +1,5 @@
 <div class="dynamic-field-container" data-field-name="availability">
+  <%= "Chọn thời gian rảnh" %>
   <% (@current_user.teacher_profile&.availability || {}).each do |day, session| %>
     <div class="field-row mb-2 d-flex align-items-center">
       <input type="text"

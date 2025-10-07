@@ -1,7 +1,9 @@
 <div class="header">
   <div>
-    <%= image_tag "logo.jpg", alt: "Ảnh đại diện", class: "img-thumbnail", width: 100 %>
+    <%= link_to root_path, class: "d-flex text-decoration-none" do %>
+      <%= image_tag "logo.jpg", alt: "Ảnh đại diện", class: "img-thumbnail", width: 100 %>
     <p>Find user</p>
+    <% end %>
   </div>
   <div>
     <% if current_user %>

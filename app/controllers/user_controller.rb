@@ -36,19 +36,31 @@ class UserController < ApplicationController
     end
   end
 
-  def params_update
-    # binding.pry
-    params.require(:user).permit(
-        :full_name, :email, :phone_number, :gender, :date_of_birth, :is_locked,
-        teacher_profile_attributes: [
-            :bio, :education_level, :expirence_years, :location, :hourly_rate,
-            subjects: {},
-            availability: {}
-        ]
-    )
-
+  def lock
+    update = User.find(params[:id]).update(is_locked: true)
+    if update
+      flash[:notice] = "Cập nhật thành công!"
+      redirect_to root_path
+    else
+      flash.now[:alert] = "Cập nhật thất bại, vui lòng kiểm tra lại."
+      render :edit, status: :unprocessable_entity
+    end
   end
 
+  def unlock
+    update = User.find(params[:id]).update(is_locked: false)
+    if update
+      flash[:notice] = "Cập nhật thành công!"
+      redirect_to root_path
+    else
+      flash.now[:alert] = "Cập nhật thất bại, vui lòng kiểm tra lại."
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def detail
+    @user_detail = User.find(params[:id])
+  end
 end
 
 

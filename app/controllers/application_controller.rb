@@ -1,6 +1,9 @@
 require 'pry'
 
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
+  include UserHelper
+
   before_action :authorization
   helper_method :current_user
 

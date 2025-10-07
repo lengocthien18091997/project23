@@ -31,6 +31,24 @@ form.update-form .form-group {
     padding: 10px 0;
 }
 
+form.update-form .form-group select {
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s
+    ease-in-out, box-shadow .15s
+    ease-in-out;
+}
+
 div.pagination {
     display: flex;
     justify-content: end;
@@ -208,6 +226,47 @@ body.new {
     padding: 12px 15px;
     border: 1px solid #ddd;
     text-align: left;
+}
+
+div.detail {
+    padding: 0 160px;
+}
+
+div.detail .form-group {
+    padding: 10px 10px;
+    border: 1px solid;
+    border-top: none;
+}
+
+div.detail .form-group:first-child {
+    border-top: 1px solid;
+}
+
+div.detail .form-group label {
+    width: 200px;
+    font-weight: bold;
+}
+
+td.locked .btn-outline-danger {
+    background: #adb5bd;
+}
+
+td.locked .btn-outline-danger:hover {
+    cursor: default;
+}
+
+td .btn-success {
+    background: #adb5bd;
+}
+
+td .btn-success:hover {
+    background: #adb5bd;
+    cursor: default;
+}
+
+td.locked .btn-success {
+    background: #198754;
+    cursor: pointer;
 }
 
 .index th {

@@ -1,4 +1,5 @@
 <div class="dynamic-field-container" data-field-name="subjects">
+  <%= "Chọn môn học" %>
   <% (@current_user.teacher_profile&.subjects || {}).each do |subject, level| %>
     <div class="field-row mb-2 d-flex align-items-center">
       <input type="text"

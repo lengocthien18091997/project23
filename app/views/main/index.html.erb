@@ -57,32 +57,31 @@
             <td><%= user.full_name %></td>
             <td><%= user.email %></td>
             <td><%= user.phone_number %></td>
-            <td class="text-center">
-              <button type="button" class="btn btn-primary">
+            <td class="<%= 'locked' if user.is_locked == true %> text-center d-flex justify-content-center">
+              <%= link_to user_detail_path(user), method: :get, class: "btn btn-primary" do %>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                   <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"></path>
                   <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"></path>
                 </svg>
                 Xem chi tiết
-              </button>
-              <button type="button" class="btn btn-outline-danger">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-lock2-fill" viewBox="0 0 16 16">
-                  <path d="M7 6a1 1 0 0 1 2 0v1H7z"></path>
-                  <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2m-2 6v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V8.3c0-.627.46-1.058 1-1.224V6a2 2 0 1 1 4 0"></path>
-                </svg>
-                Lock
-              </button>
-              <button type="button" class="btn btn-success">
+              <%end %>
+              <%if @current_user.role == 'admin' %>
+                <%= button_to user_lock_path(user), method: :post, class: "btn btn-outline-danger" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-lock2-fill" viewBox="0 0 16 16">
+                    <path d="M7 6a1 1 0 0 1 2 0v1H7z"></path>
+                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2m-2 6v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V8.3c0-.627.46-1.058 1-1.224V6a2 2 0 1 1 4 0"></path>
+                  </svg>
+                  Lock
+                <%end %>
+
+                <%= button_to user_unlock_path(user), method: :post, class: "btn btn-success" do %>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-lock2-fill" viewBox="0 0 16 16">
                   <path d="M7 6a1 1 0 0 1 2 0v1H7z"></path>
                   <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2m-2 6v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V8.3c0-.627.46-1.058 1-1.224V6a2 2 0 1 1 4 0"></path>
                 </svg>
                 Open
-              </button>
-              <%#= link_to "Xem chi tiết",  class: "btn btn-detail" %>
-<!--              user_path(user)-->
-              <%#= link_to "Lock", method: :patch, class: "btn btn-lock" %>
-<!--              lock_user_path(user),-->
+                <%end %>
+              <%end %>
             </td>
           </tr>
         <% end %>

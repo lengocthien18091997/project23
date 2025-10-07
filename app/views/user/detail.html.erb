@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Find user</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-..." crossorigin="anonymous">
+</head>
+<body class="index">
+
+<%= render "common/header" %>
+
+<h2>Xem thông tin</h2>
+
+<%= render "common/notice" %>
+
+<div class="detail">
+  <div class="form-group">
+    <%= label :full_name, "Họ tên" %>
+    <span><%= @user_detail.full_name %></span>
+  </div>
+
+  <%if @current_user.role = 'admin' %>
+    <div class="form-group">
+      <%= label :role, "Vai trò" %>
+      <span><%= @user_detail.role %></span>
+    </div>
+    <%end %>
+
+  <div class="form-group">
+    <%= label :email, "Email" %>
+    <span><%= @user_detail.email %></span>
+  </div>
+
+  <div class="form-group">
+    <%= label :phone_number, "Số điện thoại" %>
+    <span><%= @user_detail.phone_number %></span>
+  </div>
+
+  <div class="form-group">
+    <%= label :gender, "Giới tính" %>
+    <span><%= @user_detail.gender %></span>
+  </div>
+
+  <div class="form-group">
+    <%= label :date_of_birth, "Ngày sinh" %>
+    <span><%= @user_detail.date_of_birth %></span>
+  </div>
+
+  <div class="form-group">
+    <%= label :bio, "Giới thiệu" %>
+    <span><%= @user_detail.teacher_profile&.bio %></span>
+  </div>
+
+  <div class="form-group">
+    <%= label :education_level, "Trình độ" %>
+    <span><%= @user_detail.teacher_profile&.education_level %></span>
+  </div>
+
+  <div class="form-group">
+    <%= label :experience_years, "Số năm kinh nghiệm" %>
+    <span><%= @user_detail.teacher_profile&.experience_years %></span>
+  </div>
+
+  <div class="form-group">
+    <%= label :location, "Tỉnh/TP" %>
+    <span><%= @user_detail.teacher_profile&.location %></span>
+  </div>
+
+  <div class="form-group">
+    <%= label :hourly_rate, "Offer" %>
+    <span><%= @user_detail.teacher_profile&.hourly_rate %></span>
+  </div>
+
+  <div class="form-group">
+    <%= label :subject, "Môn dạy" %>
+    <span><%= @user_detail.teacher_profile&.subjects %></span>
+  </div>
+
+  <div class="form-group">
+    <%= label :availability, "Thời gian rảnh" %>
+    <span><%= @user_detail.teacher_profile&.availability %></span>
+  </div>
+
+  <div class="form-actions mt-3">
+    <%#= submit "Cập nhật", class: "btn btn-success" %>
+    <%#= link_to "Hủy", user_update_path, class: "btn btn-secondary" %>
+  </div>
+</div>
+
+</body>
+</html>

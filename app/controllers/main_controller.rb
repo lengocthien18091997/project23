@@ -2,7 +2,7 @@ class MainController < ApplicationController
 
   # GET /index
   def index
-    @user = User.all
+    @user = User.all.order(:id)
 
     if params[:query].present?
       q = "%#{params[:query]}%"
