@@ -50,44 +50,62 @@
     <span><%= @user_detail.date_of_birth %></span>
   </div>
 
-  <div class="form-group">
-    <%= label :bio, "Giới thiệu" %>
-    <span><%= @user_detail.teacher_profile&.bio %></span>
-  </div>
+  <%if @user_detail.role == 'teacher'%>
+    <div class="form-group">
+      <%= label :bio, "Giới thiệu" %>
+      <span><%= @user_detail.teacher_profile&.bio %></span>
+    </div>
 
-  <div class="form-group">
-    <%= label :education_level, "Trình độ" %>
-    <span><%= @user_detail.teacher_profile&.education_level %></span>
-  </div>
+    <div class="form-group">
+      <%= label :education_level, "Trình độ" %>
+      <span><%= @user_detail.teacher_profile&.education_level %></span>
+    </div>
 
-  <div class="form-group">
-    <%= label :experience_years, "Số năm kinh nghiệm" %>
-    <span><%= @user_detail.teacher_profile&.experience_years %></span>
-  </div>
+    <div class="form-group">
+      <%= label :experience_years, "Số năm kinh nghiệm" %>
+      <span><%= @user_detail.teacher_profile&.experience_years %></span>
+    </div>
 
-  <div class="form-group">
-    <%= label :location, "Tỉnh/TP" %>
-    <span><%= @user_detail.teacher_profile&.location %></span>
-  </div>
+    <div class="form-group">
+      <%= label :location, "Tỉnh/TP" %>
+      <span><%= @user_detail.teacher_profile&.location %></span>
+    </div>
 
-  <div class="form-group">
-    <%= label :hourly_rate, "Offer" %>
-    <span><%= @user_detail.teacher_profile&.hourly_rate %></span>
-  </div>
+    <div class="form-group">
+      <%= label :hourly_rate, "Offer" %>
+      <span><%= @user_detail.teacher_profile&.hourly_rate %></span>
+    </div>
 
-  <div class="form-group">
-    <%= label :subject, "Môn dạy" %>
-    <span><%= @user_detail.teacher_profile&.subjects %></span>
-  </div>
+    <div class="form-group">
+      <%= label :subject, "Môn dạy" %>
+      <% if @user_detail.teacher_profile&.subjects.present? %>
+        <ul class="d-inline-block m-0 ps-3">
+          <% @user_detail.teacher_profile.subjects.each do |subject, level| %>
+            <li><%= "#{subject} - #{level}" %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <span>Chưa có môn học</span>
+      <% end %>
+    </div>
 
-  <div class="form-group">
-    <%= label :availability, "Thời gian rảnh" %>
-    <span><%= @user_detail.teacher_profile&.availability %></span>
-  </div>
+    <div class="form-group">
+      <%= label :availability, "Thời gian rảnh" %>
+      <% if @user_detail.teacher_profile&.availability.present? %>
+        <ul class="d-inline-block m-0 ps-3">
+          <% @user_detail.teacher_profile.availability.each do |date, time| %>
+            <li><%= "#{date} - #{time}" %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <span>Chưa cập nhật</span>
+      <% end %>
+    </div>
+  <%end %>
 
   <div class="form-actions mt-3">
-    <%#= submit "Cập nhật", class: "btn btn-success" %>
-    <%#= link_to "Hủy", user_update_path, class: "btn btn-secondary" %>
+    <%= link_to "Gửi lời mời", request_path(@user_detail), method: :get, class: "btn btn-success" if @current_user.role == 'student' %>
+    <%= link_to "Quay lại", root_path, class: "btn btn-secondary" %>
   </div>
 </div>
 

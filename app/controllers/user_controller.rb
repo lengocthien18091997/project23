@@ -24,6 +24,7 @@ class UserController < ApplicationController
 
   def get
     @current_user.build_teacher_profile if @current_user.teacher_profile.nil?
+    render :update
   end
 
   def update

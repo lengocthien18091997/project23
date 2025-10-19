@@ -9,12 +9,7 @@
 <div class="login-box">
   <h2>Teacher Finder</h2>
 
-  <% if flash[:alert] %>
-    <div class="alert"><%= flash[:alert] %></div>
-  <% end %>
-  <% if flash[:notice] %>
-    <div style="color:green;text-align:center;"><%= flash[:notice] %></div>
-  <% end %>
+  <%= render "common/notice" %>
 
   <%= form_with url: register_path, method: :post do %>
     <label>Bạn là:</label>

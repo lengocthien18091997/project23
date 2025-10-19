@@ -10,4 +10,16 @@ module UserHelper
         ]
     )
   end
+
+  def tinh_cap_hoc(date)
+    tuoi = Time.now.year - date.year
+    case tuoi
+    when 0..11
+      'Cấp 1'
+    when 12..15
+      'Cấp 2'
+    else
+      'Cấp 3'
+    end
+  end
 end
