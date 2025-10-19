@@ -33,6 +33,8 @@ Rails.application.routes.draw do
     get "/timetable", to: "timetable#list"
 
     get "/support", to: "support#list"
+    post "/support", to: "support#create"
+
     post "/support/processing/:id", to: "support#processing", as: "support_processing"
     post "/support/closed/:id", to: "support#closed", as: "support_closed"
 
