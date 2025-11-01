@@ -14,7 +14,7 @@ class RequestController < ApplicationController
       render :new, status: :unprocessable_entity
       return
     end
-    subject = params[:mon_cap].split(' - ').first
+    subject = params[:mon_cap].split(' - ').first.gsub('_', ' ')
     grade_level = params[:mon_cap].split(' - ').last
     if old_request.where(subject: subject).present?
       flash[:alert] = "Đã gửi lời mời cho môn này rồi!"
@@ -30,7 +30,7 @@ class RequestController < ApplicationController
       return
     end
     date_time = params[:date_time].split(' - ')
-    date_time = { date_time.first => date_time.last }
+    date_time = { date_time.first.gsub('_', ' ') => date_time.last.gsub('_', ' ') }
     flash[:notice] = "Đăng kí thành công!"
     Request.create!(
       student_id: @current_user.id,

@@ -10,6 +10,6 @@ class TimetableController < ApplicationController
                      .where(teacher_id: @current_user.id)
                      .select("timetables.*, users.full_name AS full_name")
     end
-    @timetable = @timetable.paginate(page: params[:page], per_page: 3)
+    # @timetable = @timetable.paginate(page: params[:page], per_page: 3)
   end
 end
